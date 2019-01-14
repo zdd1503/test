@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script>
+		let dataset = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+		let color = ['red', 'blue', 'pink', 'yellow', 'lightBlue', 'lightGreen', 'aqua', '#333', 'orange', '#f611e9']
+		function arc(r, R, start, end) {
+			let arc = d3.arc()
+				.innerRadius(r)
+				.outerRadius(R)
+				.startAngle(start)
+				.endAngle(end)
+			return arc()
+		}
+		let svg = d3.select('body').append('svg')
+			.attr('width', 500)
+			.attr('height', 500)
+			.attr('transform', 'translate(250,250)')
+		let g = svg.append('g')
+			.attr('transform', 'translate(250,250)')
+		let path = g.selectAll('path').data(dataset).enter().append('path')
+			.attr('d', function (d, i) {
+				return arc(40, 90, Math.PI / 6 * i, Math.PI / 6 * (i + 1))
+			})
+			.attr('fill', function (d, i) {
+				return color[i]
+			})
+			.attr('stroke', 'blue')
+
+		//文字路径
+		let defs = g.append('defs')
+		let gText = defs.selectAll('g').data(dataset).enter().append('g')
+		gText.append('path')
+			.attr('id', 'circle')
+			.attr('d', function (d, i) {
+				return arc(90, 110, Math.PI / 6 * i, Math.PI / 6 * (i + 1))
+			})
+
+		//文字
+		let text = gText.append('text')
+			.attr('x', 10)
+			.attr('y', 20)
+			.style('fill', 'steelblue')
+			.style('font-size', '24px')
+			.style('font-weight', 'bold')
+		text.append('textPath')
+			.attr('x', 10)
+			.attr('y', 20)
+			.attr('xlink:href', '#circle')
+			.text(function (d) {
+				return d
+			})
+
+
+
+	</script>
+</body>
+
+</html>
