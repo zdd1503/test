@@ -54,3 +54,6 @@ layui��ܲ���
              let b=Math.floor(Math.random()*256);
              return "rgb("+r+','+g+','+b+")";
          }
+//好多demo
+
+https://codepen.io/
