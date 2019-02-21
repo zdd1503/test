@@ -11,7 +11,6 @@
       overflow: hidden;
       margin: 0;
       padding: 0;
-      background-color: #222222
     }
   </style>
 </head>
@@ -33,7 +32,7 @@
 
       oCanvas.width = window.innerWidth;
       oCanvas.height = window.innerHeight;
-
+      //构造函数
       function Particle() {
         particleIndex++;
 
@@ -52,7 +51,7 @@
         this.size = 0;
         this.color = getRandomColor();
       };
-
+      //原型上添加一个方法
       Particle.prototype.draw = function () {
         this.x += this.vx;
         this.y += this.vy;
